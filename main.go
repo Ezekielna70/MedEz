@@ -1,26 +1,46 @@
 package main
 
 import (
-	"fmt"
-	"log"
-
-	"backend/add_data"  // Correct import for add_data package
-	"backend/get_data"  // Correct import for get_data package
+    "github.com/Ezekielna70/Backend/routes"
+    "github.com/Ezekielna70/Backend/services"
+    "github.com/gofiber/fiber/v2"
+    "github.com/gofiber/fiber/v2/middleware/cors"
+    "log"
+    "os"
 )
 
 func main() {
-	// Call the function to add data
-	err := add_data.AddData()
-	if err != nil {
-		log.Fatalf("Failed to add data: %v", err)
-	}
+    app := fiber.New()
 
-	// Call the function to get data based on DeviceID
-	deviceID := "12545"  // Example DeviceID
-	err = get_data.GetDataByDeviceID(deviceID)
-	if err != nil {
-		log.Fatalf("Failed to get data: %v", err)
-	}
+    // Add CORS middleware
+    app.Use(cors.New(cors.Config{
+        AllowOrigins: "*",
+        AllowHeaders: "Origin, Content-Type, Accept",
+    }))
 
-	fmt.Println("All operations completed.")
+    // Initialize Firestore
+    projectID := os.Getenv("FIREBASE_PROJECT_ID")
+    if projectID == "" {
+        projectID = "protelmedez"
+    }
+    
+    // Initialize Firestore with error handling
+    if err := services.InitFirestore(projectID); err != nil {
+        log.Fatalf("Failed to initialize Firestore: %v", err)
+    }
+
+    // Setup routes
+    routes.Setup(app)
+
+    // Get port from environment variable or default to 8080
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080"
+    }
+
+    // Start server
+    log.Printf("Server starting on port %s", port)
+    if err := app.Listen(":" + port); err != nil {
+        log.Fatalf("Error starting server: %v", err)
+    }
 }
