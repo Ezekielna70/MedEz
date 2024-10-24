@@ -16,5 +16,5 @@ func Setup(app *fiber.App) {
     app.Post("/patient/login", controllers.PatientLogin)
 
     // Device routes
-    //app.Post("/device/store", controllers.DeviceStore)
+    app.Post("/device/store", controllers.DeviceStore)
 }
