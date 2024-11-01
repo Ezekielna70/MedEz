@@ -15,6 +15,7 @@ class PilihJenisAkun : AppCompatActivity(){
             val intent = Intent(this, JenisAkunPasien::class.java)
             startActivity(intent)
             finish()
+            //mak kau hijau
         }
 
         findViewById<ImageView>(R.id.iconpendamping).setOnClickListener {
