@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/icon_medez"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon_medez"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MedEZ"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MedEZ">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="android:screenOrientation"/>
+
+        <activity android:name=".LandingPage1" />
+        <activity android:name=".LandingPage2" />
+        <activity android:name=".JenisAkunPasien" />
+        <activity android:name=".JenisAkunPendamping" />
+        <activity android:name=".PilihJenisAkun" />
+        <activity android:name=".LoginPage" />
+        <activity android:name=".SignUpPage" />
+        <activity android:name=".ScanQRPasien"/>
+        <activity android:name=".ScanQRPendamping"/>
+    </application>
+
+</manifest>

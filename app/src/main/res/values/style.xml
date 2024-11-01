@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="scan_qr">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">#125872</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <style name="qr_terletak">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#125872</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <style name="organizing_">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#125872</item>
+    </style>
+
+    <style name="ayo_mulai_p">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="welcome_to">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#174470</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <style name="lorem_dolor">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#125872</item>
+    </style>
+
+    <style name="halo_protel">
+        <item name="android:textSize">30sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:textColor">#125872</item>
+    </style>
+
+    <style name="jum_at_13_m">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:textColor">#125872</item>
+    </style>
+
+    <style name="alarm_berik">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#174470</item>
+    </style>
+
+
+    </resources>
+

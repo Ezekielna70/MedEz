@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JenisAkunPasien">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
+
+    <RelativeLayout
+        android:layout_width="97dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="158dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="237dp">
+        
+        <ImageView
+            android:id="@+id/halo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/halo_jenis_akun"/>
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iconpas_besar"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="783dp">
+
+        <TextView
+            android:id="@+id/buttonscanQRpasien"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="SCAN QR DULU YUK!"
+            android:gravity="center"
+            android:textAppearance="@style/ayo_mulai_p"
+            android:textStyle="bold"
+            android:background="@drawable/button_background"/>
+
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

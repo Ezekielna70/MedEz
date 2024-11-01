@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LandingPage2">
+
+    <LinearLayout
+        android:id="@+id/terms_page_1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_background"/>
+<!--        android:clipToOutline="true" >-->
+
+        <TextView
+            android:id="@+id/welcome_to"
+            android:layout_width="148dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="132dp"
+            android:layout_marginTop="101dp"
+            android:text="@string/welcome_to"
+            android:textAppearance="@style/welcome_to"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/capriola"/>
+        <View
+            android:id="@+id/medez_2"
+            android:layout_width="259dp"
+            android:layout_height="103dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="71dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="131dp"
+            android:layout_marginRight="82dp"
+            android:background="@drawable/logo_medez"
+            android:elevation="4dp"
+            />
+    <TextView
+        android:id="@+id/lorem_dolor"
+        android:layout_width="328dp"
+        android:layout_height="474dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="266dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        android:textAppearance="@style/lorem_dolor"
+        android:justificationMode="inter_word"
+        android:gravity="top"
+        />
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/buttonayo"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="783dp"
+        android:background="@drawable/button_mulai">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="AYO MULAI PENJADWALAN!"
+            android:gravity="center"
+            android:textAppearance="@style/ayo_mulai_p"
+            android:textStyle="bold"
+            android:background="@drawable/button_background"/>
+
+    </RelativeLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

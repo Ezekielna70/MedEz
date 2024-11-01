@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">MedEZ</string>
+    <string name="scan_qr">SCAN QR</string>
+    <string name="qr_terletak">QR terletak di bagian belakang alat</string>
+
+    <string name="organizing_">
+organizing meds made easy
+</string>
+
+    <string name="ayo_mulai_p">
+LANJUT!
+</string>
+
+    <string name="welcome_to">
+Welcome to
+</string>
+
+    <string name="halo_protel">
+Halo, ProTel !
+</string>
+
+    <string name="jum_at_13_m">
+Jumat, 13 Mei 2003
+</string>
+
+    <string name="alarm_berik">
+Alarm berikutnya
+</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

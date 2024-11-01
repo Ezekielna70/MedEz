@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.HomeFragment"
+    android:background="@drawable/home_bg">
+
+    <TextView
+        android:id="@+id/halo_protel"
+        android:layout_width="205dp"
+        android:layout_height="38dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="38dp"
+        android:text="@string/halo_protel"
+        android:textAppearance="@style/halo_protel"
+        android:fontFamily="@font/capriola"
+        android:gravity="center_horizontal|center_vertical"
+        />
+
+    <TextView
+        android:id="@+id/tanggal"
+        android:layout_width="148dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="79dp"
+        android:text="@string/jum_at_13_m"
+        android:textAppearance="@style/jum_at_13_m"
+        android:gravity="center_horizontal|center_vertical"
+        android:fontFamily="@font/capriola"
+        />
+
+    <ImageView
+        android:id="@+id/logo_medez"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="338dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/logo_medez_elips"
+        />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/cek_profil_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="143dp">
+
+        <FrameLayout
+            android:layout_width="163dp"
+            android:layout_height="186dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/box_home_page"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="68dp"
+                android:background="@drawable/cek_profil_teks"/>
+
+            <ImageView
+                android:id="@+id/logo_cek_profil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/cek_profil_icon"/>
+
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/list_obat_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="219dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="143dp">
+
+        <FrameLayout
+            android:layout_width="163dp"
+            android:layout_height="186dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/box_kanan_atas_home"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_obat_logo"
+                android:layout_marginTop="64dp"
+                android:layout_marginLeft="93dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_obat_teks"
+                android:layout_marginTop="65dp"
+                android:layout_marginLeft="25dp"/>
+
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/status_alat_button"
+        android:layout_width="165dp"
+        android:layout_height="186dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="219dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="364dp">
+
+        <FrameLayout
+            android:layout_width="163dp"
+            android:layout_height="186dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/box_kanan_bawah_home"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginLeft="52dp"
+                android:background="@drawable/check_mark_logo"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/alat_teks"
+                android:layout_marginTop="90dp"
+                android:layout_marginLeft="60dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tersambung_teks"
+                android:layout_marginTop="115dp"
+                android:layout_marginLeft="20dp"/>
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/tambah_jadwal_button"
+        android:layout_width="163dp"
+        android:layout_height="186dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="364dp">
+
+        <FrameLayout
+            android:layout_width="163dp"
+            android:layout_height="186dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/box_kiri_bawah_home"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="19dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/tambah_jadwal_logo"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tambah_jadwal_teks"
+                android:layout_marginTop="82dp"
+                android:layout_gravity="center_horizontal"/>
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ImageView
+        android:id="@+id/alarm_berik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="600dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/alarm_berikutnya_teks"
+        />
+
+    <TextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="620dp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:fontFamily="@font/capriola"
+        android:text="00:00:00"
+        android:textColor="@color/bluer"/>
+
+</FrameLayout>
