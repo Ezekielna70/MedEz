@@ -6,21 +6,38 @@ import (
     "github.com/Ezekielna70/Backend/models"
     "google.golang.org/api/iterator"
 )
+func LookForCaregiver(ID string) (bool, error) {
+    iter := client.Collection("caregiver").Where("CareID", "==", ID).Documents(context.Background())
+    defer iter.Stop()
+
+    // Check if any document exists with the given CareID
+    _, err := iter.Next()
+    if err == iterator.Done {
+        return false, nil // No document found
+    }
+    if err != nil {
+        return false, err // Some other error occurred
+    }
+
+    return true, nil // Document exists
+}
+
 
 func AddPatient(patient models.Patient) error {
     // Create a new document reference which will generate a unique ID
     docRef := client.Collection("patient").NewDoc()
 
-    // Use the generated document ID as CareID
+    // Use the generated document ID as PatID
     patient.PatID = docRef.ID
 
-    // Prepare the data with the auto-generated CareID
+    // Prepare the data with the auto-generated PatID
     data := map[string]interface{}{
         "PatID":       patient.PatID,
         "PatUsername": patient.PatUsername,
         "PatEmail":    patient.PatEmail,
         "PatPassword": patient.PatPassword,
         "PatAge":      patient.PatAge,
+        "CareID":      patient.CareID,
     }
 
     // Save the data with the generated ID

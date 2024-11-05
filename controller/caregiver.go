@@ -149,3 +149,100 @@ func CaregiverLogin(c *fiber.Ctx) error {
 		},
 	})
 }
+
+
+// controllers/caregiver.go
+func CaregiverAddMedicine(c *fiber.Ctx) error {
+	log.Printf("Received caregiver add medicine request from: %s", c.IP())
+
+	// Define a struct to parse the incoming request
+	var request struct {
+		PatID    string          `json:"pat_id"`
+		Medicine models.Medicine `json:"medicine"`
+	}
+
+	// Parse the JSON request body
+	if err := c.BodyParser(&request); err != nil {
+		log.Printf("Error parsing request body: %v", err)
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Invalid request format",
+			"error":   err.Error(),
+		})
+	}
+
+	// Validate required fields
+	if request.PatID == "" || request.Medicine.MedUsername == "" || request.Medicine.MedDosage == "" || request.Medicine.MedFunction == "" {
+		log.Printf("Validation failed: missing required fields")
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Missing required fields",
+		})
+	}
+
+	// Check if patient exists (call to service layer)
+	CareCheckPat, err := services.CareCheckPat(request.PatID)
+	if err != nil {
+		log.Printf("Error checking patient existence: %v", err)
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Internal server error",
+		})
+	}
+	if !CareCheckPat {
+		log.Printf("Patient not found with ID: %s", request.PatID)
+		return c.Status(http.StatusNotFound).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Patient not found",
+		})
+	}
+
+	// Call the service layer to add the medicine
+	medID, err := services.AddMedicineToPatient(request.PatID, request.Medicine)
+	if err != nil {
+		log.Printf("Error adding medicine to database: %v", err)
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Failed to add medicine",
+			"error":   err.Error(),
+		})
+	}
+
+	log.Printf("Successfully added medicine with ID: %s for patient: %s", medID, request.PatID)
+	return c.Status(http.StatusCreated).JSON(fiber.Map{
+		"status":  "success",
+		"message": "Medicine added successfully",
+		"med_id":  medID,
+	})
+}
+
+
+// controllers/caregiver.go
+func CaregiverGetMedicines(c *fiber.Ctx) error {
+    log.Printf("Received caregiver get medicines request from: %s", c.IP())
+
+    // Get the PatID from the URL parameters
+    patID := c.Params("pat_id")
+    if patID == "" {
+        return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Patient ID is required",
+        })
+    }
+
+    // Call the service to get medicines for the patient
+    medicines, err := services.GetMedicinesByPatientID(patID)
+    if err != nil {
+        log.Printf("Error retrieving medicines for patient %s: %v", patID, err)
+        return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Failed to retrieve medicines",
+        })
+    }
+
+    return c.Status(http.StatusOK).JSON(fiber.Map{
+        "status":     "success",
+        "medicines": medicines,
+    })
+}
+
