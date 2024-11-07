@@ -6,5 +6,5 @@ type Patient struct {
     PatEmail    string `json:"pat_email" firestore:"PatEmail"`
     PatPassword string `json:"pat_password" firestore:"PatPassword"`
     PatAge      int    `json:"pat_age" firestore:"PatAge"`
-    CareID      string `json:"care_id" firestore:"CareID"`
+    DevID      string `json:"dev_id" firestore:"DevID"`
 }

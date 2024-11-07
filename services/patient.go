@@ -7,7 +7,7 @@ import (
     "google.golang.org/api/iterator"
 )
 func LookForCaregiver(ID string) (bool, error) {
-    iter := client.Collection("caregiver").Where("CareID", "==", ID).Documents(context.Background())
+    iter := client.Collection("device").Where("DevID", "==", ID).Documents(context.Background())
     defer iter.Stop()
 
     // Check if any document exists with the given CareID
@@ -37,7 +37,7 @@ func AddPatient(patient models.Patient) error {
         "PatEmail":    patient.PatEmail,
         "PatPassword": patient.PatPassword,
         "PatAge":      patient.PatAge,
-        "CareID":      patient.CareID,
+        "DevID":      patient.DevID,
     }
 
     // Save the data with the generated ID

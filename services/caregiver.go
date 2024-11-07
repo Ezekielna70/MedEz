@@ -124,3 +124,5 @@ func GetMedicinesByPatientID(patID string) ([]models.Medicine, error) {
 
     return medicines, nil
 }
+
+

@@ -33,7 +33,7 @@ func PatientSignup(c *fiber.Ctx) error {
 	log.Printf("Parsed patient data: %+v", patient)
 
 	// Validate required fields
-	if patient.PatEmail == "" || patient.PatPassword == "" || patient.PatUsername == "" || patient.CareID == "" {
+	if patient.PatEmail == "" || patient.PatPassword == "" || patient.PatUsername == "" || patient.DevID == "" {
 		log.Printf("Validation failed: missing required fields")
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"status":  "error",
@@ -41,9 +41,9 @@ func PatientSignup(c *fiber.Ctx) error {
 		})
 	}
 
-    existsCare, err := services.LookForCaregiver(patient.CareID)
+    existsCare, err := services.LookForCaregiver(patient.DevID)
     if err != nil {
-        log.Printf("Error checking Care existence: %v", err)
+        log.Printf("Error checking Dev existence: %v", err)
         return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
             "status":  "error",
             "message": "Internal server error",
@@ -52,12 +52,12 @@ func PatientSignup(c *fiber.Ctx) error {
     }
     
     if existsCare {
-        log.Printf("Care exists: %s", patient.CareID)
+        log.Printf("Dev exists: %s", patient.DevID)
     } else {
-        log.Printf("Care does not exist for ID: %s", patient.CareID)
+        log.Printf("Dev does not exist for ID: %s", patient.DevID)
         return c.Status(http.StatusNotFound).JSON(fiber.Map{
             "status":  "error",
-            "message": "Caregiver not found",
+            "message": "Device not found",
         })
     }
     
