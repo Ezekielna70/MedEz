@@ -1,0 +1,116 @@
+package controllers
+
+import (
+    "github.com/gofiber/fiber/v2"
+    "github.com/Ezekielna70/Backend/models"
+    "github.com/Ezekielna70/Backend/services"
+    "time"
+)
+
+func DeviceStore(c *fiber.Ctx) error {
+    // Create a struct to parse the incoming JSON with all possible fields
+    var requestData struct {
+        DevID       string `json:"dev_id"`
+        DevUsername string `json:"dev_username"`
+        DevStatus   string `json:"dev_status"`
+        DevTime     string `json:"dev_time"`
+        //PatID       string `json:"pat_id,omitempty"`  // Optional
+        CareID      string `json:"care_id"` // Optional
+    }
+
+    if err := c.BodyParser(&requestData); err != nil {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error":   "Invalid request body",
+            "details": err.Error(),
+        })
+    }
+
+    // Validate required fields
+    if requestData.DevID == "" {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error": "DevID is required",
+        })
+    }
+
+    if requestData.DevUsername == "" {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error": "DevUsername is required",
+        })
+    }
+
+    if requestData.DevStatus == "" {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error": "DevStatus is required",
+        })
+    }
+
+    // Parse time
+    var devTime time.Time
+    //var err error
+    if requestData.DevTime != "" {
+        // Try parsing with multiple formats
+        formats := []string{
+            time.RFC3339,
+            "2006-01-02T15:04:05Z07:00",
+            "2006-01-02 15:04:05",
+            time.RFC3339Nano,
+        }
+
+        parsed := false
+        for _, format := range formats {
+            if t, parseErr := time.Parse(format, requestData.DevTime); parseErr == nil {
+                devTime = t
+                parsed = true
+                break
+            }
+        }
+
+        if !parsed {
+            devTime = time.Now() // Use current time if parsing fails
+        }
+    } else {
+        devTime = time.Now() // Use current time if not provided
+    }
+
+    // Create Device struct with all fields
+    device := models.Device{
+        DevID:       requestData.DevID,
+        DevUsername: requestData.DevUsername,
+        DevStatus:   requestData.DevStatus,
+        DevTime:     devTime,
+        //PatID:       requestData.PatID,   // Include PatID if provided
+        CareID:      requestData.CareID,  // Include CareID if provided
+    }
+
+    // Update device
+    if err := services.UpdateDevice(device); err != nil {
+
+        if err.Error() == "CareID already exists for this device" {
+            return c.Status(fiber.StatusConflict).JSON(fiber.Map{
+                "error": "CareID already exists for this device",
+            })
+        }
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "error":   "Failed to store device",
+            "details": err.Error(),
+        })
+    }
+
+    // Return success response with all fields
+    response := fiber.Map{
+        "dev_id":       device.DevID,
+        "dev_username": device.DevUsername,
+        "dev_status":   device.DevStatus,
+        "dev_time":     device.DevTime.Format(time.RFC3339),
+    }
+
+    // Only include PatID and CareID in response if they were provided
+    if device.CareID != "" {
+        response["care_id"] = device.CareID
+    }
+
+    return c.Status(fiber.StatusOK).JSON(fiber.Map{
+        "message": "Device stored successfully",
+        "device":  response,
+    })
+}
