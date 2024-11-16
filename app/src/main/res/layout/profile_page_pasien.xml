@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/pasien_profile_page">
+
+    <FrameLayout
+        android:layout_width="323dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="261dp"
+        android:layout_marginLeft="45dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/white_box"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pasien"
+            android:textSize="24sp"
+            android:fontFamily="@font/capriola"
+            android:textStyle="bold"
+            android:textColor="@color/bluer"/>
+    </FrameLayout>
+    
+    <androidx.cardview.widget.CardView
+        android:layout_width="323dp"
+        android:layout_height="188dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="318dp"
+        app:cardCornerRadius="15dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="295dp"
+                android:layout_height="41dp"
+                android:background="@drawable/white_box"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="13dp"
+                android:background="@drawable/baseline_person_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="52dp"
+                android:text="Fuljencio Protel A."
+                android:fontFamily="@font/capriola"
+                android:textSize="20sp"
+                android:textColor="@color/bluer"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="295dp"
+                android:layout_height="41dp"
+                android:background="@drawable/white_box"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="13dp"
+                android:background="@drawable/baseline_email_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="52dp"
+                android:text="medez@gmail.com"
+                android:fontFamily="@font/capriola"
+                android:textSize="20sp"
+                android:textColor="@color/bluer"/>
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
