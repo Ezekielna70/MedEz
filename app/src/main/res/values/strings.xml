@@ -28,4 +28,55 @@ Alarm berikutnya
 </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="paracetamol">
+Paracetamol
+</string>
+
+    <string name="setiap_8_ja">
+setiap 8 jam
+</string>
+
+    <string name="info_nama_obat">
+Nama Obat
+</string>
+
+    <string name="nama_obat_nya">
+Paracetamol
+</string>
+
+    <string name="aturan_minum_text">
+Aturan Minum
+</string>
+
+    <string name="aturan_minum">
+setiap 8 jam | setelah makan | 1 Kapsul
+</string>
+
+    <string name="deskripsi_o">
+Deskripsi Obat
+</string>
+
+    <string name="penjelasan_obat">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed porttitor risus a leo viverra, sed consectetur leo pellentesque.
+        Sed dapibus pellentesque nibh, porta sagittis sem pulvinar vitae.
+        Donec interdum neque a quam malesuada hendrerit ac nec nunc.
+        Etiam bibendum diam diam.
+        Morbi fringilla turpis ut sem scelerisque dapibus.
+        Curabitur dignissim finibus odio, id finibus justo porta sed.
+        Suspendisse magna dolor, varius sed nisi dignissim, egestas tincidunt diam.
+        Nullam ornare, nunc a blandit eleifend, ex felis interdum eros, eu pretium elit lacus ac ante.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed porttitor risus a leo viverra, sed consectetur leo pellentesque.
+        Sed dapibus pellentesque nibh, porta sagittis sem pulvinar vitae.
+        Donec interdum neque a quam malesuada hendrerit ac nec nunc.
+        Etiam bibendum diam diam.
+        Morbi fringilla turpis ut sem scelerisque dapibus.
+        Curabitur dignissim finibus odio, id finibus justo porta sed.
+        Suspendisse magna dolor, varius sed nisi dignissim, egestas tincidunt diam.
+        Nullam ornare, nunc a blandit eleifend, ex felis interdum eros, eu pretium elit lacus ac ante.
+    </string>
+    <string name="time">Waktu Minum Obat</string>
+
 </resources>

@@ -59,6 +59,41 @@
         <item name="android:textColor">#174470</item>
     </style>
 
+    <style name="paracetamol">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#174470</item>
+    </style>
+
+    <style name="setiap_8_ja">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#174470</item>
+    </style>
+
+    <style name="info_nama_obat">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#174470</item>
+    </style>
+
+    <style name="nama_obat_nya">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#174470</item>
+    </style>
+
+    <style name="aturan_minum_text">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#174470</item>
+    </style>
+
+    <style name="aturan_minum">
+        <item name="android:textSize">13.5sp</item>
+        <item name="android:textColor">#174470</item>
+    </style>
+
+    <style name="deskripsi_o">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#174470</item>
+    </style>
+
 
     </resources>
 

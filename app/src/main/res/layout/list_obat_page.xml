@@ -3,6 +3,136 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.SchedFragment">
+    tools:context=".fragments.SchedFragment"
+    android:background="@drawable/list_obat_page">
+    
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/header_box"
+        android:background="@drawable/list_obat_header"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"/>
+
+    <FrameLayout
+        android:layout_width="162dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="205dp"
+        android:layout_marginLeft="22dp">
+
+        <ImageView
+            android:id="@+id/list_obat_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_obat_kiri_atas"/>
+
+        <TextView
+            android:id="@+id/nama_obat_1"
+            android:layout_width="116dp"
+            android:layout_height="23dp"
+            android:text="@string/paracetamol"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="80dp"
+            android:textAppearance="@style/paracetamol"
+            android:textStyle="bold"
+            android:fontFamily="@font/capriola"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/obat_1"
+            android:layout_width="116dp"
+            android:layout_height="23dp"
+            android:text="setiap 8 jam"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="105dp"
+            android:textAppearance="@style/setiap_8_ja"
+            android:textStyle="bold"
+            android:fontFamily="@font/capriola"
+            android:gravity="center_vertical"
+            />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="162dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="205dp"
+        android:layout_marginLeft="226dp">
+
+        <ImageView
+            android:id="@+id/list_obat_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/kanan_atas_list_obat"/>
+
+        <TextView
+            android:id="@+id/nama_obat_2"
+            android:layout_width="116dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="80dp"
+            android:text="@string/paracetamol"
+            android:textStyle="bold"
+            android:fontFamily="@font/capriola"
+            android:textAppearance="@style/paracetamol"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/obat_2"
+            android:layout_width="92dp"
+            android:layout_height="19dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="105dp"
+            android:layout_marginLeft="35dp"
+            android:text="@string/setiap_8_ja"
+            android:textStyle="bold"
+            android:textAppearance="@style/setiap_8_ja"
+            android:gravity="center_vertical"
+            />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="162dp"
+        android:layout_height="149dp"
+        android:layout_marginTop="382dp"
+        android:layout_marginLeft="22dp">
+
+        <ImageView
+            android:id="@+id/list_obat_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_obat_kiri_bawah"/>
+
+        <TextView
+            android:id="@+id/nama_obat_3"
+            android:layout_width="116dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            android:text="@string/paracetamol"
+            android:textAppearance="@style/paracetamol"
+            android:textStyle="bold"
+            android:fontFamily="@font/capriola"
+            />
+
+        <TextView
+            android:id="@+id/obat_3"
+            android:layout_width="92dp"
+            android:layout_height="19dp"
+            android:text="@string/setiap_8_ja"
+            android:layout_marginTop="105dp"
+            android:textAppearance="@style/setiap_8_ja"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:fontFamily="@font/capriola"
+            />
+
+    </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

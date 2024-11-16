@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment"
     android:background="@drawable/home_bg">
 
@@ -156,7 +157,7 @@
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/tambah_jadwal_button"
+        android:id="@+id/scan_qr_button"
         android:layout_width="163dp"
         android:layout_height="186dp"
         android:layout_alignParentLeft="true"
@@ -177,41 +178,65 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="19dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/tambah_jadwal_logo"
+                android:background="@drawable/qr_scanner_page"
                 />
 
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tambah_jadwal_teks"
-                android:layout_marginTop="82dp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_marginTop="100dp"
+                android:text="SCAN\nQR"
+                android:textAlignment="center"
+                android:fontFamily="@font/capriola"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/bluer"/>
         </FrameLayout>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <ImageView
-        android:id="@+id/alarm_berik"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="600dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/alarm_berikutnya_teks"
-        />
+        android:layout_marginTop="597dp"
+        android:layout_gravity="center_horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box_homepage"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_telfon"
+            android:layout_marginLeft="40dp"
+            android:layout_gravity="center_vertical"/>
 
-    <TextView
-        android:id="@+id/countdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="620dp"
-        android:layout_gravity="center_horizontal"
-        android:textStyle="bold"
-        android:fontFamily="@font/capriola"
-        android:text="00:00:00"
-        android:textColor="@color/bluer"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="152dp"
+            android:layout_marginTop="27dp"
+            android:text="Kesulitan?"
+            android:textStyle="bold"
+            android:fontFamily="@font/capriola"
+            android:textSize="32sp"
+            android:textColor="@color/dark_red"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tombolKesulitan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="151dp"
+            android:text="Hubungi Pendamping"
+            android:textSize="10sp"
+            android:fontFamily="@font/capriola"
+            android:textStyle="bold"
+            android:textColor="@color/dark_red"
+            app:cornerRadius="15dp"/>
+
+
+    </FrameLayout>
 
 </FrameLayout>

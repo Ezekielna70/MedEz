@@ -21,7 +21,7 @@ class JenisAkunPendamping : AppCompatActivity(){
         })
 
         findViewById<RelativeLayout>(R.id.buttonscanQRpendamping).setOnClickListener {
-            val intent = Intent(this, ScanQRPendamping::class.java)
+            val intent = Intent(this, LoginPage::class.java)
             startActivity(intent)
             finish()
         }

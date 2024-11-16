@@ -29,7 +29,7 @@
     
     <androidx.cardview.widget.CardView
         android:layout_width="323dp"
-        android:layout_height="188dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="318dp"
         app:cardCornerRadius="15dp">
@@ -37,7 +37,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_gravity="center_horizontal">
 
             <ImageView
@@ -67,7 +67,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="62dp"
             android:layout_gravity="center_horizontal">
 
             <ImageView
@@ -88,6 +88,29 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="52dp"
                 android:text="medez@gmail.com"
+                android:fontFamily="@font/capriola"
+                android:textSize="20sp"
+                android:textColor="@color/bluer"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="112dp"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="295dp"
+                android:layout_height="41dp"
+                android:background="@drawable/white_box"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Device ID"
                 android:fontFamily="@font/capriola"
                 android:textSize="20sp"
                 android:textColor="@color/bluer"/>

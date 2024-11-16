@@ -10,6 +10,7 @@ import com.protel.medez.fragments.ProfileFragment
 import com.protel.medez.fragments.SchedFragment
 import com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
 
+
 class MainActivity : AppCompatActivity(){
     private lateinit var binding: MainBinding
 

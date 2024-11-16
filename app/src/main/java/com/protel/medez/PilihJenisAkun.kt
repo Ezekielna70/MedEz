@@ -1,10 +1,10 @@
 package com.protel.medez
 
-import android.content.Intent // Untuk navigasi antar Activity
-import android.os.Bundle // Untuk menyimpan status Activity
+import android.content.Intent
+import android.os.Bundle
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity // Untuk membuat Activity
-import android.widget.RelativeLayout
+import androidx.appcompat.app.AppCompatActivity
+
 
 class PilihJenisAkun : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +15,6 @@ class PilihJenisAkun : AppCompatActivity(){
             val intent = Intent(this, JenisAkunPasien::class.java)
             startActivity(intent)
             finish()
-            //mak kau hijau
         }
 
         findViewById<ImageView>(R.id.iconpendamping).setOnClickListener {

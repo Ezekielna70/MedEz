@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_info_obat">
+    
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="133dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/logo_tentang_obat"/>
+
+    <TextView
+        android:id="@+id/info_nama_obat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="320dp"
+        android:text="@string/info_nama_obat"
+        android:fontFamily="@font/capriola"
+        android:textAppearance="@style/info_nama_obat"/>
+
+    <TextView
+        android:id="@+id/nama_obat_nya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="343dp"
+        android:text="@string/nama_obat_nya"
+        android:textAppearance="@style/nama_obat_nya"
+        android:textStyle="bold"
+        android:fontFamily="@font/capriola"/>
+
+    <TextView
+        android:id="@+id/aturan_minum_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="383dp"
+        android:text="@string/aturan_minum_text"
+        android:textAppearance="@style/aturan_minum_text"
+        android:fontFamily="@font/capriola"
+        />
+
+    <TextView
+        android:id="@+id/aturan_minum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="408dp"
+        android:text="@string/aturan_minum"
+        android:textAppearance="@style/aturan_minum"
+        android:fontFamily="@font/capriola"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/deskripsi_o"
+        android:layout_width="112dp"
+        android:layout_height="19dp"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="457dp"
+        android:text="@string/deskripsi_o"
+        android:textAppearance="@style/deskripsi_o"
+        android:fontFamily="@font/capriola"/>
+
+    <View
+        android:id="@+id/rectangle_6"
+        android:layout_width="260dp"
+        android:layout_height="290dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="491dp"
+        android:background="@drawable/border_txt_info_obat"
+        />
+    
+    <FrameLayout
+        android:layout_width="237dp"
+        android:layout_height="270dp"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="500dp">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipToOutline="true"
+                android:text="@string/penjelasan_obat"
+                android:scrollHorizontally="true"
+                android:fontFamily="@font/capriola"
+                android:textColor="@color/dark_blue"/>
+
+        </ScrollView>
+
+
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/back_button_info_obat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_button"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="18dp"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

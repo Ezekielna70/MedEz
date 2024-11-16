@@ -13,6 +13,7 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 import com.protel.medez.databinding.ScanQrPasienBinding
+import com.protel.medez.fragments.HomeFragment
 
 class ScanQRPasien : AppCompatActivity() {
     private lateinit var binding: ScanQrPasienBinding
@@ -62,7 +63,7 @@ class ScanQRPasien : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val intent = Intent(this@ScanQRPasien, PilihJenisAkun::class.java)
+                val intent = Intent(this@ScanQRPasien, HomeFragment::class.java)
                 startActivity(intent)
                 finish()
             }

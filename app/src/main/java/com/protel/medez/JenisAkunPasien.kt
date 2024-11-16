@@ -23,7 +23,7 @@ class JenisAkunPasien : AppCompatActivity() {
         })
 
         findViewById<TextView>(R.id.buttonscanQRpasien).setOnClickListener {
-            val intent = Intent(this, ScanQRPasien::class.java)
+            val intent = Intent(this, LoginPage::class.java)
             startActivity(intent)
             finish()
         }
