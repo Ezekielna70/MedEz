@@ -8,7 +8,7 @@ import (
 )
 
 func AddCaregiver(caregiver models.Caregiver) error {
-    // Create a new document reference which will generate a unique ID
+   
     docRef := client.Collection("caregiver").NewDoc()
 
     // Use the generated document ID as CareID
@@ -73,28 +73,29 @@ func CareCheckPat(patID string) (bool, error) {
 
 
 func AddMedicineToPatient(patID string, medicine models.Medicine) (string, error) {
-    // Get a new document reference in the "medicine" subcollection under the specified patient
-    medicineRef := client.Collection("patient").Doc(patID).Collection("medicine").NewDoc()
+	// Get a new document reference in the "medicine" subcollection under the specified patient
+	medicineRef := client.Collection("patient").Doc(patID).Collection("medicine").NewDoc()
 
-    // Use the auto-generated document ID as MedID
-    medicine.MedID = medicineRef.ID
+	// Use the auto-generated document ID as MedID
+	medicine.MedID = medicineRef.ID
 
-    // Prepare the medicine data to be saved
-    data := map[string]interface{}{
-        "MedID":        medicine.MedID,
-        "MedUsername":  medicine.MedUsername,
-        "MedDosage":    medicine.MedDosage,
-        "MedFunction":  medicine.MedFunction,
-        "MedRemaining": medicine.MedRemaining,
-    }
+	// Prepare the medicine data to be saved
+	data := map[string]interface{}{
+		"MedID":           medicine.MedID,
+		"MedUsername":     medicine.MedUsername,
+		"MedDosage":       medicine.MedDosage,
+		"MedFunction":     medicine.MedFunction,
+		"MedRemaining":    medicine.MedRemaining,
+		"ConsumptionTimes": medicine.ConsumptionTimes,  // Add consumption times here
+	}
 
-    // Save the medicine data with the generated MedID
-    _, err := medicineRef.Set(context.Background(), data)
-    if err != nil {
-        return "", err
-    }
+	// Save the medicine data with the generated MedID
+	_, err := medicineRef.Set(context.Background(), data)
+	if err != nil {
+		return "", err
+	}
 
-    return medicine.MedID, nil
+	return medicine.MedID, nil
 }
 
 

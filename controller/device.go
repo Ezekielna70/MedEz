@@ -5,6 +5,8 @@ import (
     "github.com/Ezekielna70/Backend/models"
     "github.com/Ezekielna70/Backend/services"
     "time"
+    "log"
+    "net/http"
 )
 
 func DeviceStore(c *fiber.Ctx) error {
@@ -112,5 +114,41 @@ func DeviceStore(c *fiber.Ctx) error {
     return c.Status(fiber.StatusOK).JSON(fiber.Map{
         "message": "Device stored successfully",
         "device":  response,
+    })
+}
+
+func GetMedByDevice(c *fiber.Ctx) error {
+    log.Printf("Received request to get medicines for device from: %s", c.IP())
+
+    // Get the DevID from the URL parameters
+    devID := c.Params("dev_id")
+    if devID == "" {
+        return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Device ID is required",
+        })
+    }
+
+    // Call the service to get medicines for the device
+    medicines, err := services.GetMedicinesByDeviceID(devID)
+    if err != nil {
+        log.Printf("Error retrieving medicines for device %s: %v", devID, err)
+        return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+            "status":  "error",
+            "message": err.Error(),
+        })
+    }
+
+    if medicines == nil {
+        return c.Status(http.StatusOK).JSON(fiber.Map{
+            "status":    "success",
+            "message":   "No medicines found",
+            "medicines": []models.Medicine{}, // Return empty array for consistency
+        })
+    }
+
+    return c.Status(http.StatusOK).JSON(fiber.Map{
+        "status":    "success",
+        "medicines": medicines,
     })
 }
