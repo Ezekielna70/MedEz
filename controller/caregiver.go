@@ -151,7 +151,6 @@ func CaregiverLogin(c *fiber.Ctx) error {
 }
 
 
-// controllers/caregiver.go
 func CaregiverAddMedicine(c *fiber.Ctx) error {
 	log.Printf("Received caregiver add medicine request from: %s", c.IP())
 
@@ -215,7 +214,6 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		"med_id":  medID,
 	})
 }
-
 
 // controllers/caregiver.go
 func CaregiverGetMedicines(c *fiber.Ctx) error {

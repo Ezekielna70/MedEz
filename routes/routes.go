@@ -1,7 +1,7 @@
 package routes
 
 import (
-    "github.com/Ezekielna70/Backend/controller" // Update to reflect your Go module
+    "github.com/Ezekielna70/Backend/controller" 
     "github.com/gofiber/fiber/v2"
 )
 
@@ -16,13 +16,13 @@ func Setup(app *fiber.App) {
     // Patient routes
     app.Post("/patient/signup", controllers.PatientSignup)
     app.Post("/patient/login", controllers.PatientLogin)
-    //app.Post("/patient/add/caregiver")
-    //app.Post("/patient/add/device")
+
 
     // Device routes
     app.Post("/device/store", controllers.DeviceStore)
+    app.Get("/getMed/:dev_id", controllers.GetMedByDevice)
 
     // Schedule routes
-    app.Get("/schedule/fromdevice", controllers.DeviceStore)
-    //app.Post("/schedule/fromapp")
+    //app.Get("/schedule/fromdevice", controllers.DeviceStore)
+
 }
