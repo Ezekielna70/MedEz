@@ -16,6 +16,8 @@ func InitFirestore(projectID string) error {
     
     // Initialize Firebase App
     conf := &firebase.Config{ProjectID: projectID}
+
+    //credentialsFile := "D:/Kuliah_ITS/Semester_7/PROTEL/Backend/protelmedez-c426bcbe188b.json"
     
     // Use absolute path to your credentials file
     credentialsFile := "D:/Kuliah_ITS/Semester_7/PROTEL/Backend/protelmedez-c426bcbe188b.json"
