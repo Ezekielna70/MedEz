@@ -4,47 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.HomeFragment"
-    android:background="@drawable/home_bg">
+    tools:context=".fragments.HomeFragment">
 
-    <TextView
-        android:id="@+id/halo_protel"
-        android:layout_width="205dp"
-        android:layout_height="38dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="38dp"
-        android:text="@string/halo_protel"
-        android:textAppearance="@style/halo_protel"
-        android:fontFamily="@font/capriola"
-        android:gravity="center_horizontal|center_vertical"
-        />
 
-    <TextView
-        android:id="@+id/tanggal"
-        android:layout_width="148dp"
-        android:layout_height="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="38dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="79dp"
-        android:text="@string/jum_at_13_m"
-        android:textAppearance="@style/jum_at_13_m"
-        android:gravity="center_horizontal|center_vertical"
-        android:fontFamily="@font/capriola"
-        />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_homepage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="16dp"
+        app:theme = "@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/dark_blue">
 
-    <ImageView
-        android:id="@+id/logo_medez"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="338dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/logo_medez_elips"
-        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/logo_medez"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/logo_medez_elips"/>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_toRightOf="@+id/logo_medez"
+                    android:id="@+id/logo_medez_teks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MedEz"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/capriola"
+                    android:textSize="20dp"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/cek_profil_button"

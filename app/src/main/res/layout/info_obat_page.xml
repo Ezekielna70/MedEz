@@ -1,102 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_info_obat">
-    
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="133dp"
-        android:layout_marginTop="90dp"
-        android:background="@drawable/logo_tentang_obat"/>
+    android:background="@drawable/main_background">
 
-    <TextView
-        android:id="@+id/info_nama_obat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="320dp"
-        android:text="@string/info_nama_obat"
-        android:fontFamily="@font/capriola"
-        android:textAppearance="@style/info_nama_obat"/>
+    <RelativeLayout
+        android:layout_width="146dp"
+        android:layout_height="33dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="115dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/white">
 
-    <TextView
-        android:id="@+id/nama_obat_nya"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="343dp"
-        android:text="@string/nama_obat_nya"
-        android:textAppearance="@style/nama_obat_nya"
-        android:textStyle="bold"
-        android:fontFamily="@font/capriola"/>
+        <ImageView
+            android:id="@+id/tentang_title"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:padding="10dp"
+            android:background="@drawable/ic_about"/>
 
-    <TextView
-        android:id="@+id/aturan_minum_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="383dp"
-        android:text="@string/aturan_minum_text"
-        android:textAppearance="@style/aturan_minum_text"
-        android:fontFamily="@font/capriola"
-        />
-
-    <TextView
-        android:id="@+id/aturan_minum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="408dp"
-        android:text="@string/aturan_minum"
-        android:textAppearance="@style/aturan_minum"
-        android:fontFamily="@font/capriola"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/deskripsi_o"
-        android:layout_width="112dp"
-        android:layout_height="19dp"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="457dp"
-        android:text="@string/deskripsi_o"
-        android:textAppearance="@style/deskripsi_o"
-        android:fontFamily="@font/capriola"/>
-
-    <View
-        android:id="@+id/rectangle_6"
-        android:layout_width="260dp"
-        android:layout_height="290dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginTop="491dp"
-        android:background="@drawable/border_txt_info_obat"
-        />
-    
-    <FrameLayout
-        android:layout_width="237dp"
-        android:layout_height="270dp"
-        android:layout_marginLeft="89dp"
-        android:layout_marginTop="500dp">
-
-        <ScrollView
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tentang_title"
+            android:fontFamily="@font/capriola"
+            android:textColor="@color/bluer"
+            android:layout_centerInParent="true"
+            android:text="Tentang Obat"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clipToOutline="true"
-                android:text="@string/penjelasan_obat"
-                android:scrollHorizontally="true"
-                android:fontFamily="@font/capriola"
-                android:textColor="@color/dark_blue"/>
+    </RelativeLayout>
 
-        </ScrollView>
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_width="323dp"
+        android:layout_height="676dp"
+        android:layout_marginTop="164dp"
+        android:background="@drawable/container_info_obat">
+
+        <ImageView
+            android:id="@+id/ic_pill"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_pill"
+            android:layout_marginBottom="25dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/info_nama_obat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ic_pill"
+            android:layout_marginLeft="30dp"
+            android:text="Nama Obat"
+            android:fontFamily="@font/capriola"
+            android:textSize="15sp"
+            android:textColor="@color/bluer"/>
+
+        <TextView
+            android:id="@+id/nama_obat_nya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/info_nama_obat"
+            android:textSize="20sp"
+            android:textColor="@color/dark_blue"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/capriola"/>
+
+        <TextView
+            android:id="@+id/Dosis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/nama_obat_nya"
+            android:text="Dosis"
+            android:textColor="@color/dark_blue"
+            android:fontFamily="@font/capriola"
+            />
+
+        <TextView
+            android:id="@+id/aturan_minum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/Dosis"
+            android:textColor="@color/dark_blue"
+            android:fontFamily="@font/capriola"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/sisa_obat_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/aturan_minum"
+            android:text="Stok Obat"
+            android:textColor="@color/dark_blue"
+            android:fontFamily="@font/capriola"
+            />
+
+        <TextView
+            android:id="@+id/sisa_obat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/sisa_obat_title"
+            android:textColor="@color/dark_blue"
+            android:fontFamily="@font/capriola"
+            android:layout_marginBottom="30dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/deskripsi_o"
+            android:layout_width="112dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/sisa_obat"
+            android:text="Deskripsi Obat"
+            android:textColor="@color/dark_blue"
+            android:fontFamily="@font/capriola"/>
+
+        <FrameLayout
+            android:layout_width="260dp"
+            android:layout_height="290dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/deskripsi_o">
+
+            <View
+                android:id="@+id/rectangle_6"
+                android:layout_width="260dp"
+                android:layout_height="270dp"
+                android:background="@drawable/dotted_border"/>
+
+            <ScrollView
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/deskripsi_container"
+                    android:justificationMode="inter_word"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipToOutline="true"
+                    android:fontFamily="@font/capriola"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/dark_blue" />
+
+            </ScrollView>
+
+        </FrameLayout>
+
+    </RelativeLayout>
 
 
-
-    </FrameLayout>
 
     <ImageView
         android:id="@+id/back_button_info_obat"
@@ -107,4 +172,4 @@
         android:layout_marginTop="18dp"/>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

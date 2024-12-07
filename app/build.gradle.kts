@@ -2,18 +2,16 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.dagger)
-    kotlin("kapt")
+    id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 }
 
-
-
 android {
-    namespace = "com.protel.medez"
-    compileSdk = 34
+    namespace = "com.protel.myapplication"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.duta.medez"
+        applicationId = "com.protel.myapplication"
         minSdk = 27
         targetSdk = 34
         versionCode = 1
@@ -43,7 +41,6 @@ android {
         viewBinding = true
         dataBinding = true
     }
-
 }
 
 dependencies {
@@ -56,12 +53,20 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidXAppCompat)
-    implementation(libs.androidx.coordinatorlayout)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.runtime.android)
-    implementation(libs.androidx.room.runtime.jvm)
-    implementation(libs.androidx.benchmark.common)
+    implementation(libs.androidx.constraintlayout)
+    implementation ("androidx.appcompat:appcompat:1.6.1")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.8.0")
+    implementation ("androidx.core:core-ktx:1.12.0")
+    implementation (platform("com.google.firebase:firebase-bom:33.6.0"))
+    implementation ("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-messaging")
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -69,27 +74,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.androidx.material3)
-
-
-    kapt(libs.room.compiler)
-
-    implementation(libs.dagger.hilt)
-    kapt(libs.dagger.kapt)
-
-    implementation(libs.compose.material)
-
-    implementation(libs.hilt.compose.navigation)
-    implementation(libs.retrofit.gson.convertor)
-
-    implementation ("com.google.android.material:material:1.9.0")
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
-    implementation("com.google.zxing:core:3.4.1")
-    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation ("com.github.qamarelsafadi:CurvedBottomNavigation:0.1.3")
-    implementation ("androidx.work:work-runtime-ktx:2.9.0")
-    implementation ("com.google.code.gson:gson:2.8.9")
 
 }
-
-apply(plugin = "dagger.hilt.android.plugin")

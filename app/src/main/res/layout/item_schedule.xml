@@ -1,0 +1,26 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/white_box">
+
+    <TextView
+        android:id="@+id/tvReminderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reminder Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/bluer"/>
+
+    <TextView
+        android:id="@+id/tvReminderDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reminder Description"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/dark_blue"/>
+</LinearLayout>

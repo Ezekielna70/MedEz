@@ -1,46 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PilihJenisAkun">
+    android:background="@drawable/main_background">
 
-    <RelativeLayout
-        android:id="@+id/scanqr_page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
-    </RelativeLayout>
 
    <RelativeLayout
-        android:layout_width="211dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="328dp"
-       android:layout_marginLeft="85dp">
+       android:id="@+id/title_pilih_jenis"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="200dp"
+       android:layout_centerHorizontal="true"
+       android:padding="20dp">
 
-       <ImageView
-           android:id="@+id/pilihakun"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:src="@drawable/pilih_jenis_akun"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:paddingStart="20dp"
+           android:paddingEnd="20dp"
+           android:paddingTop="10dp"
+           android:paddingBottom="10dp"
+           android:text="Pilih Jenis Akun"
+           android:gravity="center"
+           android:textSize="20dp"
+           android:fontFamily="@font/capriola"
+           android:textColor="@color/white"
+           android:backgroundTint="@color/bluer"
+           android:background="@drawable/button_background"/>
 
    </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/iconpasien"
-        android:layout_width="200dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/iconpasien"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_pilih_jenis"
+        android:layout_centerHorizontal="true">
 
-    <ImageView
-        android:id="@+id/iconpendamping"
-        android:layout_width="200dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="170dp"
-        android:src="@drawable/icon_pendamping"/>
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <Button
+                android:id="@+id/pilih_akun_pasien"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:backgroundTint="@color/dark_blue"
+                android:background="@drawable/button_background"
+                android:text="Akun pasien"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/capriola"
+                android:textSize="35dp"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <LinearLayout
+                android:paddingTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/pilih_akun_pasien">
+
+                <Button
+                    android:id="@+id/pilih_akun_pendamping"
+                    android:padding="10dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:backgroundTint="@color/dark_red"
+                    android:background="@drawable/button_background"
+                    android:text="Akun\nPendamping"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/capriola"
+                    android:textSize="24dp"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

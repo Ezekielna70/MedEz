@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/main_background"
-    tools:context=".SignUpPage">
+    tools:context=".authentication.SignUpPage">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign Up"
-                android:id="@+id/loginText"
+                android:id="@+id/signup_text"
                 android:textSize="30dp"
                 android:fontFamily="@font/capriola"
                 android:textAlignment="center"
@@ -42,7 +42,7 @@
                 android:layout_height="50dp"
                 android:id="@+id/username"
                 android:background="@drawable/custom_edittext"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Nama"
                 android:drawableLeft="@drawable/baseline_person_24"
@@ -55,7 +55,7 @@
                 android:layout_height="50dp"
                 android:id="@+id/email"
                 android:background="@drawable/custom_edittext"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:inputType="textEmailAddress"
                 android:padding="8dp"
                 android:hint="Email"
@@ -69,7 +69,7 @@
                 android:layout_height="50dp"
                 android:id="@+id/password"
                 android:background="@drawable/custom_edittext"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:hint="Password"
@@ -77,6 +77,33 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
                 android:drawablePadding="8dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/usia"
+                android:background="@drawable/custom_edittext"
+                android:layout_marginTop="20dp"
+                android:inputType="number"
+                android:padding="8dp"
+                android:hint="Usia"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:drawablePadding="8dp"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:id="@+id/deviceID_container"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_edittext"
+                android:padding="8dp"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+
+                android:fontFamily="@font/capriola"
+                android:textColor="@color/gray"
+                android:visibility="gone"/>
 
 
 
@@ -88,8 +115,7 @@
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/dark_blue"
-                app:cornerRadius = "20dp"/>
+                android:background="@drawable/button_background"/>
 
             <TextView
                 android:layout_width="match_parent"

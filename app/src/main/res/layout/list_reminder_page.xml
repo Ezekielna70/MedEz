@@ -1,0 +1,29 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background">
+
+    <!-- Tombol Tambah Jadwal -->
+    <Button
+        android:id="@+id/btnTambahJadwal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/bluer"
+        android:text="Tambah Jadwal"
+        android:textColor="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
+
+    <!-- RecyclerView untuk daftar reminder -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSchedule"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnTambahJadwal"
+        android:visibility="visible"/>
+</RelativeLayout>

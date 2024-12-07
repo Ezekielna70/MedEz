@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370594421083",
+    "project_id": "medez-7a4b4",
+    "storage_bucket": "medez-7a4b4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370594421083:android:da06b1bea115c409e6627e",
+        "android_client_info": {
+          "package_name": "com.protel.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkgaAlch5NR18zp7gX1pf3F_5ERwMDEYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,56 +2,53 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
-        android:name=".BaseApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/icon_medez"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon_medez"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MedEZ"
+        android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
-
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.MedEZ">
+            android:theme="@style/Theme.MyApplication">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LandingPage1"/>
+        <activity android:name=".ScanQr" />
+        <activity android:name=".authentication.LoginPage"/>
+        <activity android:name=".PilihAkun"/>
+        <activity android:name=".authentication.SignUpPage"/>
+        <activity android:name=".meds.AddReminder"/>
+        <activity android:name=".meds.ReminderList"/>
+        <activity android:name=".ProfilePasien"/>
+        <activity android:name=".meds.InfoObat"/>
 
-        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
-            android:screenOrientation="fullSensor"
-            tools:replace="android:screenOrientation"/>
-
-        <activity android:name=".LandingPage1" />
-        <activity android:name=".LandingPage2" />
-        <activity android:name=".JenisAkunPasien" />
-        <activity android:name=".JenisAkunPendamping" />
-        <activity android:name=".PilihJenisAkun" />
-        <activity android:name=".LoginPage" />
-        <activity android:name=".SignUpPage" />
-        <activity android:name=".ScanQRPasien"/>
-        <activity android:name=".ScanQRPendamping"/>
-
-        <receiver android:name=".presentation.ReminderReceiver"
-            android:exported="false"
+        <receiver
+            android:name=".ReminderNotificationReceiver"
+            android:exported="true"
             android:enabled="true"/>
+
 
     </application>
 
