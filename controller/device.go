@@ -143,7 +143,7 @@ func GetMedByDevice(c *fiber.Ctx) error {
         return c.Status(http.StatusOK).JSON(fiber.Map{
             "status":    "success",
             "message":   "No medicines found",
-            "medicines": []models.Medicine{}, // Return empty array for consistency
+            "medicines": []models.MedicineResponse{}, // Return empty array for consistency
         })
     }
 

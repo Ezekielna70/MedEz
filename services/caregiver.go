@@ -86,7 +86,7 @@ func AddMedicineToPatient(patID string, medicine models.Medicine) (string, error
 		"MedDosage":       medicine.MedDosage,
 		"MedFunction":     medicine.MedFunction,
 		"MedRemaining":    medicine.MedRemaining,
-		"ConsumptionTimes": medicine.ConsumptionTimes,  // Add consumption times here
+		"ConsumptionTimes": medicine.ConsumptionTimes,
 	}
 
 	// Save the medicine data with the generated MedID

@@ -80,9 +80,8 @@ func UpdateDevice(device models.Device) error {
     return nil
 }
 
-func GetMedicinesByDeviceID(devID string) ([]models.Medicine, error) {
+func GetMedicinesByDeviceID(devID string) ([]models.MedicineResponse, error) {
     ctx := context.Background()
-
 
     patientIter := client.Collection("patient").Where("DevID", "==", devID).Limit(1).Documents(ctx)
     defer patientIter.Stop()
@@ -95,15 +94,13 @@ func GetMedicinesByDeviceID(devID string) ([]models.Medicine, error) {
         return nil, fmt.Errorf("error fetching patient: %v", err)
     }
 
-
     patID := patientDoc.Ref.ID
     log.Printf("Found patient with PatID: %s", patID)
 
-    
     medicinesIter := client.Collection("patient").Doc(patID).Collection("medicine").Documents(ctx)
     defer medicinesIter.Stop()
 
-    var medicines []models.Medicine
+    var medicineResponses []models.MedicineResponse
     for {
         medDoc, err := medicinesIter.Next()
         if err == iterator.Done {
@@ -120,15 +117,21 @@ func GetMedicinesByDeviceID(devID string) ([]models.Medicine, error) {
             return nil, fmt.Errorf("error mapping medicine document: %v", err)
         }
 
-        log.Printf("Fetched medicine: %+v", medicine)
-        medicines = append(medicines, medicine)
+        // Map to the MedicineResponse struct
+        response := models.MedicineResponse{
+            MedID:            medicine.MedID,              // Assuming "MedID" is the correct field
+            ConsumptionTimes: medicine.ConsumptionTimes,   // Assuming "ConsumptionTimes" is an array of strings
+        }
+
+        medicineResponses = append(medicineResponses, response)
     }
 
-    if len(medicines) == 0 {
+    if len(medicineResponses) == 0 {
         log.Printf("No medicines found for patient with PatID: %s", patID)
         return nil, nil // Return an empty slice instead of nil if you prefer
     }
 
-    return medicines, nil
+    return medicineResponses, nil
 }
+
 

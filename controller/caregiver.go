@@ -156,8 +156,14 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 
 	// Define a struct to parse the incoming request
 	var request struct {
-		PatID    string          `json:"pat_id"`
-		Medicine models.Medicine `json:"medicine"`
+		PatID    string `json:"pat_id"`
+		Medicine struct {
+			MedUsername     string   `json:"med_username"`
+			MedDosage       string   `json:"med_dosage"`
+			MedFunction     string   `json:"med_function"`
+			MedRemaining    int      `json:"med_remaining"`
+			ConsumptionTimes []string `json:"consumption_times"`
+		} `json:"medicine"`
 	}
 
 	// Parse the JSON request body
@@ -196,8 +202,17 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		})
 	}
 
+	// Convert request.Medicine to models.Medicine
+	medicine := models.Medicine{
+		MedUsername:     request.Medicine.MedUsername,
+		MedDosage:       request.Medicine.MedDosage,
+		MedFunction:     request.Medicine.MedFunction,
+		MedRemaining:    request.Medicine.MedRemaining,
+		ConsumptionTimes: request.Medicine.ConsumptionTimes,
+	}
+
 	// Call the service layer to add the medicine
-	medID, err := services.AddMedicineToPatient(request.PatID, request.Medicine)
+	medID, err := services.AddMedicineToPatient(request.PatID, medicine)
 	if err != nil {
 		log.Printf("Error adding medicine to database: %v", err)
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
@@ -214,6 +229,7 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		"med_id":  medID,
 	})
 }
+
 
 // controllers/caregiver.go
 func CaregiverGetMedicines(c *fiber.Ctx) error {
