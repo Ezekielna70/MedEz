@@ -11,13 +11,9 @@ import (
 
 // CaregiverSignup handles new caregiver registration
 func CaregiverSignup(c *fiber.Ctx) error {
-	// Log the incoming request
 	log.Printf("Received caregiver signup request from: %s", c.IP())
 
 	var caregiver models.Caregiver
-
-	// Log raw request body for debugging
-	log.Printf("Raw request body: %s", string(c.Body()))
 
 	// Parse request body into Caregiver struct
 	if err := c.BodyParser(&caregiver); err != nil {
@@ -28,9 +24,6 @@ func CaregiverSignup(c *fiber.Ctx) error {
 			"error":   err.Error(),
 		})
 	}
-
-	// Log parsed caregiver data
-	log.Printf("Parsed caregiver data: %+v", caregiver)
 
 	// Validate required fields
 	if caregiver.CareEmail == "" || caregiver.CarePassword == "" || caregiver.CareUsername == "" {
@@ -48,7 +41,6 @@ func CaregiverSignup(c *fiber.Ctx) error {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Internal server error",
-			"error":   "Error checking caregiver existence",
 		})
 	}
 
@@ -60,13 +52,12 @@ func CaregiverSignup(c *fiber.Ctx) error {
 		})
 	}
 
-	// Attempt to add the new caregiver
+	// Add the new caregiver
 	if err := services.AddCaregiver(caregiver); err != nil {
 		log.Printf("Error adding caregiver to database: %v", err)
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Failed to register caregiver",
-			"error":   err.Error(),
 		})
 	}
 
@@ -81,14 +72,10 @@ func CaregiverSignup(c *fiber.Ctx) error {
 func CaregiverLogin(c *fiber.Ctx) error {
 	log.Printf("Received caregiver login request from: %s", c.IP())
 
-	// Define login request structure
 	var loginRequest struct {
 		Email    string `json:"care_email"`
 		Password string `json:"care_password"`
 	}
-
-	// Log raw request body for debugging
-	log.Printf("Raw login request body: %s", string(c.Body()))
 
 	// Parse request body
 	if err := c.BodyParser(&loginRequest); err != nil {
@@ -96,13 +83,11 @@ func CaregiverLogin(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Invalid request format",
-			"error":   err.Error(),
 		})
 	}
 
 	// Validate required fields
 	if loginRequest.Email == "" || loginRequest.Password == "" {
-		log.Printf("Login validation failed: missing credentials")
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Email and password are required",
@@ -111,16 +96,7 @@ func CaregiverLogin(c *fiber.Ctx) error {
 
 	// Attempt to get caregiver by email
 	caregiver, err := services.GetCaregiverByEmail(loginRequest.Email)
-	if err != nil {
-		log.Printf("Error retrieving caregiver data: %v", err)
-		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"status":  "error",
-			"message": "Error retrieving caregiver data",
-		})
-	}
-
-	// Check if caregiver exists and verify password
-	if caregiver == nil {
+	if err != nil || caregiver == nil {
 		log.Printf("Login failed: caregiver not found with email: %s", loginRequest.Email)
 		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
 			"status":  "error",
@@ -130,14 +106,12 @@ func CaregiverLogin(c *fiber.Ctx) error {
 
 	// Verify password
 	if caregiver.CarePassword != loginRequest.Password {
-		log.Printf("Login failed: invalid password for email: %s", loginRequest.Email)
 		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Invalid credentials",
 		})
 	}
 
-	log.Printf("Login successful for caregiver: %s", loginRequest.Email)
 	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"status":  "success",
 		"message": "Login successful",
@@ -150,11 +124,10 @@ func CaregiverLogin(c *fiber.Ctx) error {
 	})
 }
 
-
+// CaregiverAddMedicine adds medicine to a patient
 func CaregiverAddMedicine(c *fiber.Ctx) error {
 	log.Printf("Received caregiver add medicine request from: %s", c.IP())
 
-	// Define a struct to parse the incoming request
 	var request struct {
 		PatID    string `json:"pat_id"`
 		Medicine struct {
@@ -166,43 +139,31 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		} `json:"medicine"`
 	}
 
-	// Parse the JSON request body
+	// Parse request body
 	if err := c.BodyParser(&request); err != nil {
-		log.Printf("Error parsing request body: %v", err)
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Invalid request format",
-			"error":   err.Error(),
 		})
 	}
 
 	// Validate required fields
 	if request.PatID == "" || request.Medicine.MedUsername == "" || request.Medicine.MedDosage == "" || request.Medicine.MedFunction == "" {
-		log.Printf("Validation failed: missing required fields")
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Missing required fields",
 		})
 	}
 
-	// Check if patient exists (call to service layer)
-	CareCheckPat, err := services.CareCheckPat(request.PatID)
-	if err != nil {
-		log.Printf("Error checking patient existence: %v", err)
-		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"status":  "error",
-			"message": "Internal server error",
-		})
-	}
-	if !CareCheckPat {
-		log.Printf("Patient not found with ID: %s", request.PatID)
+	// Check if patient exists
+	exists, err := services.CareCheckPat(request.PatID)
+	if err != nil || !exists {
 		return c.Status(http.StatusNotFound).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Patient not found",
 		})
 	}
 
-	// Convert request.Medicine to models.Medicine
 	medicine := models.Medicine{
 		MedUsername:     request.Medicine.MedUsername,
 		MedDosage:       request.Medicine.MedDosage,
@@ -211,18 +172,15 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		ConsumptionTimes: request.Medicine.ConsumptionTimes,
 	}
 
-	// Call the service layer to add the medicine
+	// Add medicine to the patient
 	medID, err := services.AddMedicineToPatient(request.PatID, medicine)
 	if err != nil {
-		log.Printf("Error adding medicine to database: %v", err)
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Failed to add medicine",
-			"error":   err.Error(),
 		})
 	}
 
-	log.Printf("Successfully added medicine with ID: %s for patient: %s", medID, request.PatID)
 	return c.Status(http.StatusCreated).JSON(fiber.Map{
 		"status":  "success",
 		"message": "Medicine added successfully",
@@ -230,8 +188,6 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 	})
 }
 
-
-// controllers/caregiver.go
 func CaregiverGetMedicines(c *fiber.Ctx) error {
     log.Printf("Received caregiver get medicines request from: %s", c.IP())
 
@@ -259,4 +215,35 @@ func CaregiverGetMedicines(c *fiber.Ctx) error {
         "medicines": medicines,
     })
 }
+
+func CaregiverGetAll(c *fiber.Ctx) error {
+	log.Printf("Received request to get patients linked to caregiver devices for care_id: %s", c.Params("care_id"))
+
+	// Get the care_id from the URL
+	careID := c.Params("care_id")
+	if careID == "" {
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Caregiver ID is required",
+		})
+	}
+
+	// Call the service layer to get patients linked to the caregiver
+	patients, err := services.GetPatientsByCaregiverID(careID)
+	if err != nil {
+		log.Printf("Error retrieving patients for care_id %s: %v", careID, err)
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Failed to retrieve patients",
+		})
+	}
+
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":   "success",
+		"patients": patients,
+	})
+}
+
+
+
 
