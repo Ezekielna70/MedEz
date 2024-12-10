@@ -11,6 +11,7 @@ func Setup(app *fiber.App) {
     app.Post("/caregiver/signup", controllers.CaregiverSignup)
     app.Post("/caregiver/login", controllers.CaregiverLogin)
     app.Post("/caregiver/addmed", controllers.CaregiverAddMedicine)
+    app.Get("/caregiver/getall/:care_id", controllers.CaregiverGetAll)
     app.Get("/caregiver/getmed/:pat_id", controllers.CaregiverGetMedicines) // Add :pat_id here
 
     // Patient routes
