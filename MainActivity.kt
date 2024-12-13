@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful && response.body()?.status == "success") {
                         patients = response.body()?.patients ?: emptyList()
                         val patientUsernames = patients.map { it.PatUsername }
+
                         onResult(patientUsernames)
                     } else {
                         onResult(emptyList())
