@@ -68,7 +68,7 @@ data class Reminder(
     val med_username: String,          // Corresponds to "med_username"
     val med_dosage: Int,            // Corresponds to "med_dosage"
     val med_function: String,          // Corresponds to "med_function"
-    val med_remaining: Int,            // Corresponds to "med_remaining"
+    var med_remaining: Int,            // Corresponds to "med_remaining"
     val consumption_times: List<String>, // Corresponds to "consumption_times"
     val med_slot: Int
 )
@@ -150,7 +150,16 @@ data class AddMedicineResponse(
     val status: String
 )
 
+data class DecreaseMedRequest(
+    val dev_id: String,
+    val med_id: String,
+    val med_remaining: Int
+)
 
+data class DecreaseMedResponse(
+    val message: String,
+    val status: String
+)
 
 interface ApiService {
     @POST("patient/signup")
@@ -182,4 +191,7 @@ interface ApiService {
 
     @POST("caregiver/addmed")
     fun addMedicine(@Body request: AddMedicineRequest): Call<AddMedicineResponse>
+
+    @POST("decreasemed")
+    fun decreaseMed(@Body request: DecreaseMedRequest): Call<DecreaseMedResponse>
 }

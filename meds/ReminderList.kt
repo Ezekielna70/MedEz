@@ -67,10 +67,8 @@ class ReminderList : AppCompatActivity() {
         val selectedButton = sharedPreferences.getString("selected_button", "default_value")
 
         val patientId = if (selectedButton == "pendamping") {
-            // Ambil selectedPatientID dari SharedPreferences
             sharedPreferences.getString("selected_patient_id", null)
         } else if (selectedButton == "pasien") {
-            // Ambil pat_username dari SharedPreferences
             sharedPreferences.getString("pat_id", null)
         } else {
             null
@@ -149,16 +147,13 @@ class ReminderList : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("APP_PREF", MODE_PRIVATE)
         val selectedButton = sharedPreferences.getString("selected_button", "default_value")
 
-        // Tentukan patientId sesuai logic Anda:
-        // Jika pendamping, ambil dari "selected_patient_id"
-        // Jika pasien, ambil dari "pat_username"
         val patientId = if (selectedButton == "pendamping") {
             sharedPreferences.getString("selected_patient_id", null)
         } else {
             sharedPreferences.getString("pat_id", null)
         }
 
-        val medId = reminder.med_id // Pastikan Reminder memiliki field med_id
+        val medId = reminder.med_id
 
         if (patientId != null && medId != null) {
             ApiClient.apiService.deleteMedicine(patientId, medId).enqueue(object : Callback<DeleteMedicineResponse> {
