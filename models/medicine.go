@@ -12,5 +12,11 @@ type Medicine struct {
 type MedicineResponse struct {
     MedID            string   `json:"med_id"`
     ConsumptionTimes []string `json:"consumption_times"`
+    MedRemaining    int      `json:"med_remaining" firestore:"MedRemaining"`
 }
 
+type MedicineDecrease struct {
+    DevID            string   `json:"devID"`
+    MedID            string   `json:"med_id"`
+    MedRemaining    int      `json:"med_remaining" firestore:"MedRemaining"`
+}
