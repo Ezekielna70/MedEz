@@ -122,6 +122,8 @@ func GetMedicinesByDeviceID(devID string) ([]models.MedicineResponse, error) {
             MedID:            medicine.MedID,              // Assuming "MedID" is the correct field
             ConsumptionTimes: medicine.ConsumptionTimes,   // Assuming "ConsumptionTimes" is an array of strings
             MedRemaining: medicine.MedRemaining,
+            MedSlot: medicine.MedSlot,
+            MedDosage: medicine.MedDosage,
         }
 
         medicineResponses = append(medicineResponses, response)

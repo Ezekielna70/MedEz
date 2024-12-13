@@ -133,7 +133,7 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		PatID    string `json:"pat_id"`
 		Medicine struct {
 			MedUsername     string   `json:"med_username"`
-			MedDosage       string   `json:"med_dosage"`
+			MedDosage       int   `json:"med_dosage"`
 			MedFunction     string   `json:"med_function"`
 			MedRemaining    int      `json:"med_remaining"`
 			ConsumptionTimes []string `json:"consumption_times"`
@@ -149,7 +149,7 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 	}
 
 	// Validate required fields
-	if request.PatID == "" || request.Medicine.MedUsername == "" || request.Medicine.MedDosage == "" || request.Medicine.MedFunction == "" {
+	if request.PatID == "" || request.Medicine.MedUsername == "" || request.Medicine.MedFunction == "" {
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Missing required fields",
