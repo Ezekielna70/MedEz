@@ -20,7 +20,7 @@ func InitFirestore(projectID string) error {
     //credentialsFile := "D:/Kuliah_ITS/Semester_7/PROTEL/Backend/protelmedez-c426bcbe188b.json"
     
     // Use absolute path to your credentials file
-    credentialsFile := "D:/Kuliah_ITS/Semester_7/PROTEL/Backend/protelmedez-c426bcbe188b.json"
+    credentialsFile := "/home/pi/Documents/Protel/protelmedez-c426bcbe188b.json"
     app, err := firebase.NewApp(ctx, conf, option.WithCredentialsFile(credentialsFile))
     if err != nil {
         return err
