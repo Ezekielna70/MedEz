@@ -88,6 +88,8 @@ func AddMedicineToPatient(patID string, medicine models.Medicine) (string, error
 		"MedFunction":     medicine.MedFunction,
 		"MedRemaining":    medicine.MedRemaining,
 		"ConsumptionTimes": medicine.ConsumptionTimes,
+        "MedSlot":          medicine.MedSlot,
+        "MedStatus":        "Not Taken",
 	}
 
 	// Save the medicine data with the generated MedID
@@ -199,3 +201,40 @@ func GetPatientsByCaregiverID(careID string) ([]map[string]interface{}, error) {
 	return patients, nil
 }
 
+func DeleteMedicine(patID, medID string) error {
+    // Check if the patient document exists
+    patientRef := client.Collection("patient").Doc(patID)
+    patientDoc, err := patientRef.Get(context.Background())
+    if err != nil {
+        if err.Error() == "rpc error: code = NotFound desc = Document not found" {
+            return fmt.Errorf("patient with ID %s does not exist", patID)
+        }
+        return fmt.Errorf("error retrieving patient document: %v", err)
+    }
+
+    if !patientDoc.Exists() {
+        return fmt.Errorf("patient with ID %s does not exist", patID)
+    }
+
+    // Check if the medicine document exists in the patient's "medicine" subcollection
+    medicineRef := patientRef.Collection("medicine").Doc(medID)
+    medicineDoc, err := medicineRef.Get(context.Background())
+    if err != nil {
+        if err.Error() == "rpc error: code = NotFound desc = Document not found" {
+            return fmt.Errorf("medicine with ID %s does not exist for patient %s", medID, patID)
+        }
+        return fmt.Errorf("error retrieving medicine document: %v", err)
+    }
+
+    if !medicineDoc.Exists() {
+        return fmt.Errorf("medicine with ID %s does not exist for patient %s", medID, patID)
+    }
+
+    // Perform the deletion if both documents exist
+    _, err = medicineRef.Delete(context.Background())
+    if err != nil {
+        return fmt.Errorf("failed to delete medicine: %v", err)
+    }
+
+    return nil
+}

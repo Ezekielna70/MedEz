@@ -152,3 +152,65 @@ func GetMedByDevice(c *fiber.Ctx) error {
         "medicines": medicines,
     })
 }
+
+func UpdateMedRemaining(c *fiber.Ctx) error {
+    log.Printf("Received request to update med_remaining from: %s", c.IP())
+
+    // Parse the request body
+    var requestBody struct {
+        DevID        string `json:"dev_id"`
+        MedID        string `json:"med_id"`
+        MedRemaining int    `json:"med_remaining"`
+    }
+
+    if err := c.BodyParser(&requestBody); err != nil {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Invalid request body",
+            "details": err.Error(),
+        })
+    }
+
+    // Debug log the parsed body
+    log.Printf("Parsed Request Body: %+v", requestBody)
+
+    // Validate required fields
+    if requestBody.DevID == "" {
+        log.Println("Missing dev_id in request")
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Device ID is required",
+        })
+    }
+
+    if requestBody.MedID == "" {
+        log.Println("Missing med_id in request")
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Medicine ID is required",
+        })
+    }
+
+    if requestBody.MedRemaining == 0 {
+        log.Println("Missing med_remaining or value is zero")
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Medicine remaining value is required",
+        })
+    }
+
+    // Call the service function to update med_remaining
+    err := services.UpdateMedicineRemaining(requestBody.DevID, requestBody.MedID, requestBody.MedRemaining)
+    if err != nil {
+        log.Printf("Error updating med_remaining: %v", err)
+        return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+            "status":  "error",
+            "message": err.Error(),
+        })
+    }
+
+    return c.Status(fiber.StatusOK).JSON(fiber.Map{
+        "status":  "success",
+        "message": "med_remaining updated successfully",
+    })
+}

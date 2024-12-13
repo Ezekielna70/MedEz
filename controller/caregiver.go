@@ -3,6 +3,7 @@ package controllers
 import (
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/Ezekielna70/Backend/models"
 	"github.com/Ezekielna70/Backend/services"
@@ -132,7 +133,7 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		PatID    string `json:"pat_id"`
 		Medicine struct {
 			MedUsername     string   `json:"med_username"`
-			MedDosage       string   `json:"med_dosage"`
+			MedDosage       int   `json:"med_dosage"`
 			MedFunction     string   `json:"med_function"`
 			MedRemaining    int      `json:"med_remaining"`
 			ConsumptionTimes []string `json:"consumption_times"`
@@ -148,7 +149,7 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 	}
 
 	// Validate required fields
-	if request.PatID == "" || request.Medicine.MedUsername == "" || request.Medicine.MedDosage == "" || request.Medicine.MedFunction == "" {
+	if request.PatID == "" || request.Medicine.MedUsername == "" || request.Medicine.MedFunction == "" {
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Missing required fields",
@@ -242,7 +243,48 @@ func CaregiverGetAll(c *fiber.Ctx) error {
 		"status":   "success",
 		"patients": patients,
 	})
+
+	
 }
+
+func DeleteMed(c *fiber.Ctx) error {
+    log.Printf("Received request to delete medicine from: %s", c.IP())
+
+    // Extract PatID and MedID from URL parameters
+    patID := c.Params("pat_id")
+    medID := c.Params("med_id")
+
+    if patID == "" || medID == "" {
+        return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Patient ID and Medicine ID are required",
+        })
+    }
+
+    // Call the service function to delete the medicine
+    err := services.DeleteMedicine(patID, medID)
+    if err != nil {
+        if strings.Contains(err.Error(), "does not exist") {
+            return c.Status(http.StatusNotFound).JSON(fiber.Map{
+                "status":  "error",
+                "message": err.Error(),
+            })
+        }
+        log.Printf("Error deleting medicine: %v", err)
+        return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+            "status":  "error",
+            "message": "Failed to delete medicine",
+        })
+    }
+
+    log.Printf("Successfully deleted medicine with MedID %s for PatID %s", medID, patID)
+    return c.Status(http.StatusOK).JSON(fiber.Map{
+        "status":  "success",
+        "message": "Medicine deleted successfully",
+    })
+}
+
+
 
 
 

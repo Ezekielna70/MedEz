@@ -121,6 +121,9 @@ func GetMedicinesByDeviceID(devID string) ([]models.MedicineResponse, error) {
         response := models.MedicineResponse{
             MedID:            medicine.MedID,              // Assuming "MedID" is the correct field
             ConsumptionTimes: medicine.ConsumptionTimes,   // Assuming "ConsumptionTimes" is an array of strings
+            MedRemaining: medicine.MedRemaining,
+            MedSlot: medicine.MedSlot,
+            MedDosage: medicine.MedDosage,
         }
 
         medicineResponses = append(medicineResponses, response)
@@ -132,6 +135,52 @@ func GetMedicinesByDeviceID(devID string) ([]models.MedicineResponse, error) {
     }
 
     return medicineResponses, nil
+}
+
+func UpdateMedicineRemaining(devID, medID string, medRemaining int) error {
+    ctx := context.Background()
+
+    // Locate the patient document using dev_id
+    patientIter := client.Collection("patient").Where("DevID", "==", devID).Limit(1).Documents(ctx)
+    defer patientIter.Stop()
+
+    patientDoc, err := patientIter.Next()
+    if err == iterator.Done {
+        return errors.New("no patient found with the given DevID")
+    }
+    if err != nil {
+        return fmt.Errorf("error fetching patient: %v", err)
+    }
+
+    patID := patientDoc.Ref.ID
+    log.Printf("Found patient with PatID: %s", patID)
+
+    // Locate the medicine document using med_id in the patient's medicine subcollection
+    medRef := client.Collection("patient").Doc(patID).Collection("medicine").Doc(medID)
+    medDoc, err := medRef.Get(ctx)
+    if err == iterator.Done {
+        return errors.New("no medicine found with the given MedID for the specified patient")
+    }
+    if err != nil {
+        return fmt.Errorf("error fetching medicine document: %v", err)
+    }
+
+    if !medDoc.Exists() {
+        return fmt.Errorf("medicine with ID %s does not exist for patient %s", medID, patID)
+    }
+
+    // Update the med_remaining field
+    updateData := map[string]interface{}{
+        "MedRemaining": medRemaining,
+    }
+
+    _, err = medRef.Set(ctx, updateData, firestore.MergeAll)
+    if err != nil {
+        return fmt.Errorf("failed to update med_remaining: %v", err)
+    }
+
+    log.Printf("Successfully updated med_remaining to %d for MedID: %s", medRemaining, medID)
+    return nil
 }
 
 
