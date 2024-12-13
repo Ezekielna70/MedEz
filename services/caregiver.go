@@ -6,6 +6,7 @@ import (
     "github.com/Ezekielna70/Backend/models"
     "google.golang.org/api/iterator"
     "fmt"
+    "log"
 )
 
 func AddCaregiver(caregiver models.Caregiver) error {
@@ -74,32 +75,39 @@ func CareCheckPat(patID string) (bool, error) {
 
 
 func AddMedicineToPatient(patID string, medicine models.Medicine) (string, error) {
-	// Get a new document reference in the "medicine" subcollection under the specified patient
-	medicineRef := client.Collection("patient").Doc(patID).Collection("medicine").NewDoc()
+    ctx := context.Background()
 
-	// Use the auto-generated document ID as MedID
-	medicine.MedID = medicineRef.ID
+    // Get a new document reference in the "medicine" subcollection under the specified patient
+    medicineRef := client.Collection("patient").Doc(patID).Collection("medicine").NewDoc()
 
-	// Prepare the medicine data to be saved
-	data := map[string]interface{}{
-		"MedID":           medicine.MedID,
-		"MedUsername":     medicine.MedUsername,
-		"MedDosage":       medicine.MedDosage,
-		"MedFunction":     medicine.MedFunction,
-		"MedRemaining":    medicine.MedRemaining,
-		"ConsumptionTimes": medicine.ConsumptionTimes,
-        "MedSlot":          medicine.MedSlot,
-        "MedStatus":        "Not Taken",
-	}
+    // Use the auto-generated document ID as MedID
+    medicine.MedID = medicineRef.ID
 
-	// Save the medicine data with the generated MedID
-	_, err := medicineRef.Set(context.Background(), data)
-	if err != nil {
-		return "", err
-	}
+    // Prepare the medicine data to be saved
+    data := map[string]interface{}{
+        "MedID":           medicine.MedID,
+        "MedUsername":     medicine.MedUsername,
+        "MedDosage":       medicine.MedDosage,
+        "MedFunction":     medicine.MedFunction,
+        "MedRemaining":    medicine.MedRemaining,
+        "ConsumptionTimes": medicine.ConsumptionTimes,
+        "MedSlot":         medicine.MedSlot, // Ensure this is correctly set
+        "MedStatus":       "Not Taken",
+    }
 
-	return medicine.MedID, nil
+    log.Printf("Data to Firestore: %+v", data)
+
+    // Save the medicine data with the generated MedID
+    _, err := medicineRef.Set(ctx, data)
+    if err != nil {
+        log.Printf("Error saving medicine to Firestore: %v", err)
+        return "", err
+    }
+
+    return medicine.MedID, nil
 }
+
+
 
 
 func GetMedicinesByPatientID(patID string) ([]models.Medicine, error) {

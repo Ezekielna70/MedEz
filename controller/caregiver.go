@@ -125,7 +125,6 @@ func CaregiverLogin(c *fiber.Ctx) error {
 	})
 }
 
-// CaregiverAddMedicine adds medicine to a patient
 func CaregiverAddMedicine(c *fiber.Ctx) error {
 	log.Printf("Received caregiver add medicine request from: %s", c.IP())
 
@@ -133,10 +132,11 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		PatID    string `json:"pat_id"`
 		Medicine struct {
 			MedUsername     string   `json:"med_username"`
-			MedDosage       int   `json:"med_dosage"`
+			MedDosage       int      `json:"med_dosage"`
 			MedFunction     string   `json:"med_function"`
 			MedRemaining    int      `json:"med_remaining"`
 			ConsumptionTimes []string `json:"consumption_times"`
+			MedSlot         int      `json:"med_slot"` // Parse med_slot from request
 		} `json:"medicine"`
 	}
 
@@ -165,17 +165,22 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		})
 	}
 
+	// Create medicine object
 	medicine := models.Medicine{
 		MedUsername:     request.Medicine.MedUsername,
 		MedDosage:       request.Medicine.MedDosage,
 		MedFunction:     request.Medicine.MedFunction,
 		MedRemaining:    request.Medicine.MedRemaining,
 		ConsumptionTimes: request.Medicine.ConsumptionTimes,
+		MedSlot:         request.Medicine.MedSlot, // Assign med_slot here
 	}
+
+	log.Printf("Medicine Struct Before Save: %+v", medicine)
 
 	// Add medicine to the patient
 	medID, err := services.AddMedicineToPatient(request.PatID, medicine)
 	if err != nil {
+		log.Printf("Error adding medicine: %v", err)
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  "error",
 			"message": "Failed to add medicine",
@@ -188,6 +193,7 @@ func CaregiverAddMedicine(c *fiber.Ctx) error {
 		"med_id":  medID,
 	})
 }
+
 
 func CaregiverGetMedicines(c *fiber.Ctx) error {
     log.Printf("Received caregiver get medicines request from: %s", c.IP())
