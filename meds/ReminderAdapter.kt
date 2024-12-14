@@ -14,7 +14,9 @@ import com.protel.myapplication.api.Reminder
 
 class ReminderAdapter(
     private val reminders: MutableList<Reminder>,
+    private val isPatient: Boolean,
     private val onDeleteClick: (Reminder) -> Unit // Callback untuk hapus item
+
 ) : RecyclerView.Adapter<ReminderAdapter.ReminderViewHolder>() {
 
     class ReminderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,6 +24,7 @@ class ReminderAdapter(
         val descriptionTextView: TextView = itemView.findViewById(R.id.tvReminderDescription)
         val deleteButton: ImageView = itemView.findViewById(R.id.deleteBtnIdle) // Hanya satu ImageView
         val tvMedSlot: TextView = itemView.findViewById(R.id.tvMedSlot)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReminderViewHolder {
@@ -37,7 +40,16 @@ class ReminderAdapter(
 
         holder.tvMedSlot.text = "Slot: ${reminder.med_slot}"
 
+        if (isPatient) {
+            holder.deleteButton.visibility = View.GONE
+        } else {
+            holder.deleteButton.visibility = View.VISIBLE
+        }
+
+
         // Default gambar idle
+
+
         holder.deleteButton.setImageResource(R.drawable.trash_idle)
 
         // Handle pergantian gambar ketika tombol disentuh

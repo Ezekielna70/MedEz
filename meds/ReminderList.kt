@@ -36,7 +36,12 @@ class ReminderList : AppCompatActivity() {
         val btnTambahJadwal: Button = findViewById(R.id.btnTambahJadwal)
         val rvSchedule: RecyclerView = findViewById(R.id.rvSchedule)
 
-        reminderAdapter = ReminderAdapter(reminders) { reminder ->
+        val sharedPreferences = getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+        val selectedButton = sharedPreferences.getString("selected_button", "default_value")
+        val isPatient = selectedButton == "pasien"
+
+
+        reminderAdapter = ReminderAdapter(reminders, isPatient) { reminder ->
             // Ketika delete ditekan, panggil fungsi untuk hapus obat
             deleteMedicineFromAPI(reminder)
         }
@@ -44,16 +49,19 @@ class ReminderList : AppCompatActivity() {
         rvSchedule.adapter = reminderAdapter
 
         btnTambahJadwal.setOnClickListener {
-            val intent = Intent(this, AddReminder::class.java)
-            startActivityForResult(intent, ADD_REMINDER_REQUEST_CODE)
+            if (reminders.size >= 3) {
+                Toast.makeText(this, "Jadwal penuh", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent(this, AddReminder::class.java)
+                startActivityForResult(intent, ADD_REMINDER_REQUEST_CODE)
+            }
         }
 
         fetchMedicines()
 
-        val sharedPreferences = getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
-        val selectedButton = sharedPreferences.getString("selected_button", "default_value")
 
-        if (selectedButton == "pasien") {
+        if (isPatient) {
+
             btnTambahJadwal.visibility = View.INVISIBLE
             btnTambahJadwal.isClickable = false
         } else {
@@ -78,7 +86,7 @@ class ReminderList : AppCompatActivity() {
             ApiClient.apiService.getMedicines(patientId).enqueue(object : Callback<MedicinesResponse> {
                 override fun onResponse(call: Call<MedicinesResponse>, response: Response<MedicinesResponse>) {
                     if (response.isSuccessful && response.body()?.status == "success") {
-                        val medicines = response.body()?.medicines ?: emptyList()
+                        val medicines = (response.body()?.medicines ?: emptyList()).take(3)
                         updateReminders(medicines)
                     } else {
                         Toast.makeText(this@ReminderList, "Failed to fetch medicines", Toast.LENGTH_SHORT).show()
@@ -125,20 +133,26 @@ class ReminderList : AppCompatActivity() {
             val medSlot = data.getIntExtra("med_slot",0)
 
             if (medUsername != null && medFunction != null && medDosage != null && consumptionTimes != null) {
-                val dummyMedId = ""
-                reminders.add(
+                val sharedPreferences = getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+                val selectedButton = sharedPreferences.getString("selected_button", "default_value")
+                val isPatient = selectedButton == "pasien"
 
-                    Reminder(
-                        dummyMedId,
-                        medUsername,
-                        medDosage,
-                        medFunction,
-                        medRemaining,
-                        consumptionTimes,
-                        medSlot
+                if (reminders.size < 3) {
+                    reminders.add(
+                        Reminder(
+                            med_id = "", // med_id akan diupdate setelah fetch dari API
+                            med_username = medUsername,
+                            med_dosage = medDosage,
+                            med_function = medFunction,
+                            med_remaining = medRemaining,
+                            consumption_times = consumptionTimes,
+                            med_slot = medSlot
+                        )
                     )
-                )
-                reminderAdapter.notifyDataSetChanged() // Refresh RecyclerView
+                    reminderAdapter.notifyDataSetChanged() // Refresh RecyclerView
+                } else {
+                    Toast.makeText(this, "Jadwal penuh", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
