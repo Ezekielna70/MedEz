@@ -1,6 +1,5 @@
 package com.protel.myapplication.authentication
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -29,26 +28,24 @@ class SignUpPage : AppCompatActivity() {
         val deviceId = sharedPreferences.getString("DEVICE_ID", null)
         val selectedButton = sharedPreferences.getString("selected_button", "default_value")
 
-        // Set visibility of deviceIDContainer based on selectedButton value
         if (selectedButton == "pendamping") {
             binding.deviceIDContainer.visibility = View.GONE
         } else {
             binding.deviceIDContainer.visibility = View.VISIBLE
         }
 
-        // Display the device ID in the container if available
         if (deviceId != null && selectedButton == "pasien") {
-            // Show the deviceIDContainer and set the text to the deviceId
+
             binding.deviceIDContainer.visibility = View.VISIBLE
-            binding.deviceIDContainer.text = "Device ID: $deviceId" // Set the device ID text
+            binding.deviceIDContainer.text = "Device ID: $deviceId"
         } else if (selectedButton == "pendamping"){
-            // Hide the deviceIDContainer if no deviceId is found
+
             binding.deviceIDContainer.visibility = View.GONE
         }
 
         Log.e("device ID", "Device ID: $deviceId")
 
-        // Button SignUp
+
         binding.SignUpButton.setOnClickListener {
             val username = binding.username.text.toString()
             val email = binding.email.text.toString()
@@ -66,7 +63,6 @@ class SignUpPage : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Proceed with signup based on deviceId and selectedButton
             if (deviceId != null && selectedButton == "pasien") {
                 binding.deviceIDContainer.visibility = View.VISIBLE
                 signUpAsPatient(username, email, password, age, deviceId)
@@ -85,7 +81,6 @@ class SignUpPage : AppCompatActivity() {
         }
     }
 
-    // Function to sign up as "pendamping"
     private fun signUpAsPendamping(username: String, email: String, password: String, age: Int) {
         val request = careSignupRequest(
             care_username = username,
@@ -121,7 +116,7 @@ class SignUpPage : AppCompatActivity() {
         })
     }
 
-    // Function to sign up as "patient"
+
     private fun signUpAsPatient(username: String, email: String, password: String, age: Int, deviceId: String) {
         val request = patSignupRequest(
             pat_username = username,

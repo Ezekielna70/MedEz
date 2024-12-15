@@ -2,12 +2,10 @@ package com.protel.myapplication.meds
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.protel.myapplication.R
 import com.protel.myapplication.api.Reminder
@@ -15,14 +13,13 @@ import com.protel.myapplication.api.Reminder
 class ReminderAdapter(
     private val reminders: MutableList<Reminder>,
     private val isPatient: Boolean,
-    private val onDeleteClick: (Reminder) -> Unit // Callback untuk hapus item
-
+    private val onDeleteClick: (Reminder) -> Unit
 ) : RecyclerView.Adapter<ReminderAdapter.ReminderViewHolder>() {
 
     class ReminderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.tvReminderName)
         val descriptionTextView: TextView = itemView.findViewById(R.id.tvReminderDescription)
-        val deleteButton: ImageView = itemView.findViewById(R.id.deleteBtnIdle) // Hanya satu ImageView
+        val deleteButton: ImageView = itemView.findViewById(R.id.deleteBtnIdle)
         val tvMedSlot: TextView = itemView.findViewById(R.id.tvMedSlot)
 
     }
@@ -47,33 +44,30 @@ class ReminderAdapter(
         }
 
 
-        // Default gambar idle
-
-
         holder.deleteButton.setImageResource(R.drawable.trash_idle)
 
-        // Handle pergantian gambar ketika tombol disentuh
+
         holder.deleteButton.setOnTouchListener { _, event ->
             when (event.action) {
                 android.view.MotionEvent.ACTION_DOWN -> {
-                    // Ganti ke gambar hover
+
                     holder.deleteButton.setImageResource(R.drawable.trash_hovered)
                 }
                 android.view.MotionEvent.ACTION_UP -> {
-                    // Kembali ke gambar idle setelah klik
+
                     holder.deleteButton.setImageResource(R.drawable.trash_idle)
-                    // Callback untuk hapus item
+
                     onDeleteClick(reminder)
                 }
                 android.view.MotionEvent.ACTION_CANCEL -> {
-                    // Kembali ke gambar idle jika touch dibatalkan
+
                     holder.deleteButton.setImageResource(R.drawable.trash_idle)
                 }
             }
             true
         }
 
-        // Handle klik pada item untuk membuka InfoObat
+
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, InfoObat::class.java)

@@ -10,7 +10,6 @@ import com.protel.myapplication.MainActivity
 import com.protel.myapplication.api.ApiClient
 import com.protel.myapplication.api.careLoginResponse
 import com.protel.myapplication.api.patLoginResponse
- // Add import for CareLoginRequest
 import com.protel.myapplication.api.careLoginRequest
 import com.protel.myapplication.api.patLoginRequest
 import com.protel.myapplication.databinding.LoginPageBinding
@@ -52,7 +51,7 @@ class LoginPage : AppCompatActivity() {
         }
     }
 
-    // Function to login as "pendamping"
+
     private fun careLogin(email: String, password: String) {
         val request = careLoginRequest(
             care_email = email,
@@ -71,7 +70,7 @@ class LoginPage : AppCompatActivity() {
                         editor.putString("pat_username", loginResponse.data?.care_username)
                         editor.putString("pat_email", loginResponse.data?.care_email)
                         editor.putString("care_id", loginResponse.data?.care_id)
-                        editor.putBoolean("isLoggedIn", true)  // Menyimpan status login
+                        editor.putBoolean("isLoggedIn", true)
                         editor.apply()
 
                         val intent = Intent(this@LoginPage, MainActivity::class.java)
@@ -94,7 +93,6 @@ class LoginPage : AppCompatActivity() {
         })
     }
 
-    // Function to login as "patient"
     private fun patLogin(email: String, password: String) {
         val request = patLoginRequest(
             pat_email = email,
@@ -113,10 +111,9 @@ class LoginPage : AppCompatActivity() {
                         editor.putString("pat_username", loginResponse.data?.pat_username)
                         editor.putString("pat_email", loginResponse.data?.pat_email)
                         editor.putString("pat_id", loginResponse.data?.pat_id)
-                        editor.putBoolean("isLoggedIn", true)  // Menyimpan status login
+                        editor.putBoolean("isLoggedIn", true)
                         editor.apply()
 
-                        // Setelah login berhasil, arahkan ke MainActivity
                         val intent = Intent(this@LoginPage, MainActivity::class.java)
                         startActivity(intent)
                         finish()

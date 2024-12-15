@@ -42,7 +42,6 @@ class ReminderList : AppCompatActivity() {
 
 
         reminderAdapter = ReminderAdapter(reminders, isPatient) { reminder ->
-            // Ketika delete ditekan, panggil fungsi untuk hapus obat
             deleteMedicineFromAPI(reminder)
         }
         rvSchedule.layoutManager = LinearLayoutManager(this)
@@ -105,7 +104,7 @@ class ReminderList : AppCompatActivity() {
     }
 
     private fun updateReminders(medicines: List<Medicine>) {
-        reminders.clear() // Clear existing reminders
+        reminders.clear()
         for (medicine in medicines) {
             reminders.add(
                 Reminder(
@@ -119,7 +118,7 @@ class ReminderList : AppCompatActivity() {
                 )
             )
         }
-        reminderAdapter.notifyDataSetChanged() // Refresh RecyclerView
+        reminderAdapter.notifyDataSetChanged()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -140,7 +139,7 @@ class ReminderList : AppCompatActivity() {
                 if (reminders.size < 3) {
                     reminders.add(
                         Reminder(
-                            med_id = "", // med_id akan diupdate setelah fetch dari API
+                            med_id = "",
                             med_username = medUsername,
                             med_dosage = medDosage,
                             med_function = medFunction,
@@ -149,7 +148,7 @@ class ReminderList : AppCompatActivity() {
                             med_slot = medSlot
                         )
                     )
-                    reminderAdapter.notifyDataSetChanged() // Refresh RecyclerView
+                    reminderAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(this, "Jadwal penuh", Toast.LENGTH_SHORT).show()
                 }

@@ -38,38 +38,38 @@ data class careLoginRequest(
 )
 
 data class patLoginResponse(
-    val status: String, // Status login, misalnya "success" atau "error"
-    val message: String, // Pesan sukses atau error
-    val data: patData? // Objek data user
+    val status: String,
+    val message: String,
+    val data: patData?
 )
 
 data class patData(
-    val pat_id: String, // ID pasien
-    val pat_username: String, // Username pasien
-    val pat_email: String, // Email pasien
-    val pat_age: Int // Usia pasien
+    val pat_id: String,
+    val pat_username: String,
+    val pat_email: String,
+    val pat_age: Int
 )
 
 data class careLoginResponse(
-    val status: String, // Status login, misalnya "success" atau "error"
-    val message: String, // Pesan sukses atau error
-    val data: careData? // Objek data user
+    val status: String,
+    val message: String,
+    val data: careData?
 )
 
 data class careData(
-    val care_id: String, // ID pasien
-    val care_username: String, // Username pasien
-    val care_email: String, // Email pasien
-    val care_age: Int // Usia pasien
+    val care_id: String,
+    val care_username: String,
+    val care_email: String,
+    val care_age: Int
 )
 
 data class Reminder(
     val med_id : String,
-    val med_username: String,          // Corresponds to "med_username"
-    val med_dosage: Int,            // Corresponds to "med_dosage"
-    val med_function: String,          // Corresponds to "med_function"
-    var med_remaining: Int,            // Corresponds to "med_remaining"
-    val consumption_times: List<String>, // Corresponds to "consumption_times"
+    val med_username: String,
+    val med_dosage: Int,
+    val med_function: String,
+    var med_remaining: Int,
+    val consumption_times: List<String>,
     val med_slot: Int
 )
 
@@ -150,16 +150,6 @@ data class AddMedicineResponse(
     val status: String
 )
 
-data class DecreaseMedRequest(
-    val dev_id: String,
-    val med_id: String,
-    val med_remaining: Int
-)
-
-data class DecreaseMedResponse(
-    val message: String,
-    val status: String
-)
 
 interface ApiService {
     @POST("patient/signup")
@@ -191,7 +181,4 @@ interface ApiService {
 
     @POST("caregiver/addmed")
     fun addMedicine(@Body request: AddMedicineRequest): Call<AddMedicineResponse>
-
-    @POST("decreasemed")
-    fun decreaseMed(@Body request: DecreaseMedRequest): Call<DecreaseMedResponse>
 }

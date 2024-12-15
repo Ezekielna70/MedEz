@@ -41,10 +41,8 @@ class AddReminder : AppCompatActivity() {
         val btnSaveReminder: Button = findViewById(R.id.btnSaveReminder)
         val btnCancel: Button = findViewById(R.id.btnCancel)
 
-        // Variables to store selected times
         val selectedTimes = mutableListOf<String>()
 
-        // TimePickerDialog for Alarm 1
         btnSetTime1.setOnClickListener {
             showTimePicker { time ->
                 timeSet1.text = time
@@ -53,7 +51,7 @@ class AddReminder : AppCompatActivity() {
             }
         }
 
-        // TimePickerDialog for Alarm 2
+
         btnSetTime2.setOnClickListener {
             showTimePicker { time ->
                 timeSet2.text = time
@@ -62,7 +60,7 @@ class AddReminder : AppCompatActivity() {
             }
         }
 
-        // TimePickerDialog for Alarm 3
+
         btnSetTime3.setOnClickListener {
             showTimePicker { time ->
                 timeSet3.text = time
@@ -89,7 +87,6 @@ class AddReminder : AppCompatActivity() {
             val medSlot = selectedMedSlotString.toInt()
 
 
-            // Ambil patientId dari SharedPreferences
             val sharedPreferences = getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
             val selectedButton = sharedPreferences.getString("selected_button", "default_value")
 
@@ -104,7 +101,6 @@ class AddReminder : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Buat request untuk addMedicine
             val medicineRequest = MedicineRequest(
                 med_username = reminderName,
                 med_dosage = medDosage,
@@ -119,7 +115,6 @@ class AddReminder : AppCompatActivity() {
                 medicine = medicineRequest
             )
 
-            // Panggil API addMedicine
             ApiClient.apiService.addMedicine(addMedicineRequest).enqueue(object : Callback<AddMedicineResponse> {
                 override fun onResponse(call: Call<AddMedicineResponse>, response: Response<AddMedicineResponse>) {
                     if (response.isSuccessful && response.body()?.status == "success") {
@@ -127,7 +122,6 @@ class AddReminder : AppCompatActivity() {
 
                         val medId = response.body()?.med_id ?: ""
 
-                        // Kembalikan data ke ReminderList
                         val resultIntent = Intent().apply {
                             putExtra("med_id", medId)
                             putExtra("medUsername", reminderName)
